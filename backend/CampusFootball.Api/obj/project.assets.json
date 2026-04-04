@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\a-bti\\Documents\\GitHub\\campus-football\\backend\\backend.csproj",
-      "projectName": "backend",
-      "projectPath": "C:\\Users\\a-bti\\Documents\\GitHub\\campus-football\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\a-bti\\Documents\\GitHub\\campus-football\\backend\\CampusFootball.Api\\CampusFootball.Api.csproj",
+      "projectName": "CampusFootball.Api",
+      "projectPath": "C:\\Users\\a-bti\\Documents\\GitHub\\campus-football\\backend\\CampusFootball.Api\\CampusFootball.Api.csproj",
       "packagesPath": "C:\\Users\\a-bti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\a-bti\\Documents\\GitHub\\campus-football\\backend\\obj\\",
+      "outputPath": "C:\\Users\\a-bti\\Documents\\GitHub\\campus-football\\backend\\CampusFootball.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\a-bti\\AppData\\Roaming\\NuGet\\NuGet.Config"
