@@ -1,0 +1,41 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+services:
+  campusfootballapi:
+    image: campusfootballapi
+    build:
+      context: .
+      dockerfile: backend/CampusFootball.Api/Dockerfile
+    environment:
+      #Passes PostgreSQL connection URI (standard format) string to container. 
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres-dev:5432/${DB_NAME}
+    ports:
+      - 8080:8080
+    networks:
+      - dev-network
+    #Startup race prevention. Wait until db service is confirmed ready, health-check
+    depends_on:
+      - db
+
+  db:
+    image: postgres:alpine
+    container_name: postgres-dev
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_HOST}:5432
+    #Enables data persistance independently of containers, in a docker-managed storage location
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - dev-network
+
+volumes:
+  postgres_data:
+
+ # Private user-defined bridge network - internal (container-to-container). Connection strings remain stable with Docker DNS (IP).  No ports exposed to host, Postgress not accessible from host machine. 
+networks:
+  dev-network:
+    driver: bridge
