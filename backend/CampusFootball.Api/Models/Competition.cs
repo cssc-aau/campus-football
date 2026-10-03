@@ -5,7 +5,7 @@ namespace CampusFootball.Api.Models
         public int Id { get; init; }
         public string Name { get; set;}
         
-        //Mirrored in Season: Many-to-Many, EF Core maps to a joining table
-         public ICollection<CompetitionSeason> CompetitionSeasons { get; } = [];
+        //The different "instances" of the competition. Champions League: 25/26, 26/27 ...
+        public ICollection<CompetitionSeason> Seasons { get; } = [];
     }
 }

@@ -9,6 +9,8 @@ namespace CampusFootball.Api.Models
         // CS & SW, !IT - Department of CS cannot surfice. Depends on Study Programme handling
         // Many to many relation, joining table, needed?
         public int InstitutionId { get; init; }
-        public Institution Institution { get; init; }   
+        public Institution Institution { get; init; }
+
+        public ICollection<TeamRole> MemberRoles { get; } = []; 
     }
 }

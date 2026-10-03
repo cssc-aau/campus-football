@@ -30,7 +30,7 @@ namespace CampusFootball.Api.Models
         public void Configure(EntityTypeBuilder<Match> builder)
         {
             builder.HasOne(match => match.CompetitionSeason)
-                .WithMany()
+                .WithMany(compSeason => compSeason.Matches)
                 .HasForeignKey(match => new { match.CompetitionId, match.SeasonId });
         }
     }

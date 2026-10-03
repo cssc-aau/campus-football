@@ -7,7 +7,7 @@ namespace CampusFootball.Api.Models
         //EndYear derived
         public int StartYear { get; init; }
 
-        //Mirrored in Competition: Many-to-Many, EF Core maps to a joining table
-         public ICollection<CompetitionSeason> CompetitionSeasons { get; } = [];
+        //The competion instances within the season. 26/27 - Champions League, Europa League
+        public ICollection<CompetitionSeason> Competitions { get; } = [];
     }
 }
