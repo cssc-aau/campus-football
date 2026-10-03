@@ -1,9 +1,8 @@
-namespace CampusFootball.Api.Models
+namespace CampusFootball.Api.Models;
+
+public class Venue
 {
-    public class Venue
-    {
-        public int Id { get; init; }
-        string Address { get; set; }
-        string Name { get; set; }
-    }
+    public int Id { get; init; }
+    string Address { get; set; }
+    string Name { get; set; }
 }
