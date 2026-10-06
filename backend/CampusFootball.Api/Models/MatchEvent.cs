@@ -6,6 +6,10 @@ namespace CampusFootball.Api.Models;
 public abstract class MatchEvent 
 {
     public int Id { get; init; }
+    
+    //The match it occurred in
+    public int MatchId { get; init; }
+    public Match Match { get; init; }
 
     //Required since Player is optional, must know what team the event belongs to
     public int TeamId { get; init; } 

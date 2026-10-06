@@ -10,14 +10,27 @@ public class CampusFootballContext : DbContext
     public CampusFootballContext(DbContextOptions<CampusFootballContext> options)
       : base(options) { }
     
-    
-    public DbSet<Competition> Competitions { get; set; }
-    public DbSet<Institution> Institutions { get; set; }
-    public DbSet<Venue> Venues { get; set; }
-    public DbSet<Match> Matches { get; set; }
+    //Seasons & Competitions
     public DbSet<Season> Seasons { get; set; }
+    public DbSet<Competition> Competitions { get; set; }
+    public DbSet<CompetitionSeason> CompetitionSeasons { get; set; } //Explicit DbSet needed or queried via navigational properties?
+
+    //Matches
+    public DbSet<Match> Matches { get; set; }
+    public DbSet<MatchEvent> MatchEvents => Set<MatchEvent>();
+    public DbSet<Goal> Goals => Set<Goal>();
+    public DbSet<Card> Cards => Set<Card>();
+
+    public DbSet<Venue> Venues { get; set; }
+    
+    //Teams & Roles. Person explicit DbSet?
     public DbSet<Team> Teams { get; set; }
-    public DbSet<CompetitionSeason> CompetitionSeasons { get; set; }
+    public DbSet<TeamRole> TeamRoles => Set<TeamRole>();
+    public DbSet<Player> Players => Set<Player>();
+    public DbSet<Coach> Coaches => Set<Coach>();
+    public DbSet<Leader> Leaders => Set<Leader>();
+
+    public DbSet<Institution> Institutions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -13,6 +13,8 @@ public class Match
     public int AwayTeamId{ get; init; }
     public Team AwayTeam { get; init; }
 
+    /* Identifies competition instance a match belongs to. Used to configure Composite Foreign Key. 
+     "Friendlies" considered competitions for uniform treatment */
     public int CompetitionId { get; init; }
     public int SeasonId { get; init; }
     public CompetitionSeason CompetitionSeason { get; init; }
@@ -22,6 +24,9 @@ public class Match
     //Modelling, exact pitch?
     public int VenueId{ get; set; }
     public Venue Venue { get; set; }
+
+    //To do: research ordering, possibly solved by using List?
+    public ICollection<MatchEvent> Events { get; } = [];
 } 
 
 public class MatchConfiguration : IEntityTypeConfiguration<Match>
