@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace CampusFootball.Api.Models;
 
 public class Card : MatchEvent
@@ -12,4 +15,14 @@ public class Card : MatchEvent
 public enum CardType
 {
     YellowCard, RedCard
+}
+
+public class CardConfiguration : IEntityTypeConfiguration<Card>
+{
+    public void Configure(EntityTypeBuilder<Card> builder)
+    {
+        //Store CardType enum as string, rather than the backing integer. Fragility if addition, e.g. SecondYellow
+        builder.Property(card => card.Type)
+            .HasConversion<string>();
+    }
 }
