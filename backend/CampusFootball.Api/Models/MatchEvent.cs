@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace CampusFootball.Api.Models;
 
 public abstract class MatchEvent 
@@ -8,9 +11,14 @@ public abstract class MatchEvent
     public int TeamId { get; init; } 
     public Team Team { get; init; }
 
-    //Optional. Don't force teams to log / opposing team player may be unknown
-    public int? PlayerId { get; set; }
-    public TeamRole? Player { get; set; }
-
     public int? Minute { get; set; } 
+}
+
+public class MatchEventConfiguration : IEntityTypeConfiguration<MatchEvent>
+{
+    public void Configure(EntityTypeBuilder<MatchEvent> builder)
+    {
+        //TPC (Table-per-Concrete-type). All concrete specializations mapped to individual tables with columns for inherited properties
+        builder.UseTpcMappingStrategy();
+    }
 }

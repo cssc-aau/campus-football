@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CampusFootball.Api.Models;
 
-[EntityTypeConfiguration(typeof(MatchConfiguration))]
 public class Match
 {
     public int Id { get; init; }
