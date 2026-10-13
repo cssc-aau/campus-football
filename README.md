@@ -1,7 +1,10 @@
 # campus-football
 
-## Containerization with Docker
+## Core Concepts & Architecture
+- [RESTful Web API](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+- [Vertical Slice Architecture](https://deviq.com/architecture/vertical-slice-architecture/)
 
+## Containerization with Docker
 - [PostgreSQL specific guide](https://docs.docker.com/guides/postgresql/)
 
 ## Data Access
