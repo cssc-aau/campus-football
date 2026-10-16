@@ -1,9 +1,12 @@
+using CampusFootball.Api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace CampusFootball.Api.Matches;
 
-public static class MatchEndpoints
+internal static class MatchEndpoints
 {
     //Instance extension method called on the WebApp object to register the routes
-    public static void MapMatchEndpoints(this IEndpointRouteBuilder app)
+    internal static void MapMatchEndpoints(this IEndpointRouteBuilder app)
     {
         //Group to define endpoints with common prefix & apply shared configuration to those endpoints
         RouteGroupBuilder group = app.MapGroup("/api/matches");
@@ -13,7 +16,7 @@ public static class MatchEndpoints
 
         //READ
         group.MapGet("", () => "Get some matches");
-        group.MapGet("{id:int}", (int id) => $"GET - single Match with id:{id}");
+        group.MapGet("{id:int}", GetMatch);
 
         //UPDATE a resource
         group.MapPatch("{id:int}", (int id) => $"PATCH - single Match with id:{id}");
@@ -21,5 +24,12 @@ public static class MatchEndpoints
         //DELETE a resource
         group.MapDelete("{id:int}", (int id) => $"DELETE - single Match with id:${id}");
     }
+
+    private static async Task<Results<Ok<Match>,NotFound>> GetMatch(int id, MatchService matchService)
+    {
+        return await matchService.GetMatch(id)
+            is Match match
+                ? TypedResults.Ok(match)
+                : TypedResults.NotFound();
+    }
 }
- 
