@@ -3,26 +3,40 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString =
-    builder.Configuration.GetConnectionString("Database")
-        ?? throw new InvalidOperationException("Connection string"
-        + "'Database' not found.");
+// Register the app's services in the DI Container
+builder.Services.AddOpenApi();
+
+string? connectionString = builder.Configuration.GetConnectionString("Database")
+        ?? throw new InvalidOperationException("Connection string 'Database' not found.");
 
 builder.Services.AddDbContext<CampusFootballContext>(optionsBuilder =>
     optionsBuilder.UseNpgsql(connectionString)
 );
+
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+// Configure development-only behavior
+if (app.Environment.IsDevelopment())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<CampusFootballContext>();
-    var pendingMigrations = dbContext.Database.GetPendingMigrations(); // find unapplied migrations
-    if (pendingMigrations.Any()) // if any:
+    // Apply pending database migrations on startup to keep the development database's schema up to date
+    using (var scope = app.Services.CreateScope())
     {
-        dbContext.Database.Migrate(); // apply them
+        var dbContext = scope.ServiceProvider.GetRequiredService<CampusFootballContext>();
+        var pendingMigrations = dbContext.Database.GetPendingMigrations(); // find unapplied migrations
+        if (pendingMigrations.Any()) // if any:
+        {
+            dbContext.Database.Migrate(); // apply them
+        }
     }
+
+    // Map Api documentation endpoints
+    app.MapOpenApi();
 }
 
+// Configure the HTTP request pipeline, middleware
+app.UseHttpsRedirection();
+
+// Map endpoints
 app.MapGet("/", () => "Hello World!");
 
 app.Run();

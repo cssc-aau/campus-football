@@ -9,6 +9,7 @@ services:
     environment:
       #Pass db connection string to backend api container st. configuration centralized here with .env
       ConnectionStrings__Database: "Host=db;Port=5432;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}"
+      ASPNETCORE_ENVIRONMENT: Development
     ports:
       - 8080:8080
     networks:
