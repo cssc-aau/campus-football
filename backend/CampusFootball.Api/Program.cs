@@ -8,18 +8,19 @@ var connectionString =
         ?? throw new InvalidOperationException("Connection string"
         + "'Database' not found.");
 
-builder.Services.AddDbContext<CampusFootballContext> ( optionsBuilder =>
+builder.Services.AddDbContext<CampusFootballContext>(optionsBuilder =>
     optionsBuilder.UseNpgsql(connectionString)
 );
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope()) {
+using (var scope = app.Services.CreateScope())
+{
     var dbContext = scope.ServiceProvider.GetRequiredService<CampusFootballContext>();
     var pendingMigrations = dbContext.Database.GetPendingMigrations(); // find unapplied migrations
-        if (pendingMigrations.Any()) // if any:
-        {
-            dbContext.Database.Migrate(); // apply them
-        }
+    if (pendingMigrations.Any()) // if any:
+    {
+        dbContext.Database.Migrate(); // apply them
+    }
 }
 
 app.MapGet("/", () => "Hello World!");

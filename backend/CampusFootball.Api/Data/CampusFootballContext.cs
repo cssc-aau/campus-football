@@ -9,7 +9,7 @@ public class CampusFootballContext : DbContext
     //Required public constructor st. configuration from AddDbContext is passed to the base constructor for DbContext. 
     public CampusFootballContext(DbContextOptions<CampusFootballContext> options)
       : base(options) { }
-    
+
     //Seasons & Competitions
     public DbSet<Season> Seasons { get; set; }
     public DbSet<Competition> Competitions { get; set; }
@@ -22,7 +22,7 @@ public class CampusFootballContext : DbContext
     public DbSet<Card> Cards => Set<Card>();
 
     public DbSet<Venue> Venues { get; set; }
-    
+
     //Teams & Roles. Person explicit DbSet?
     public DbSet<Team> Teams { get; set; }
     public DbSet<TeamRole> TeamRoles => Set<TeamRole>();

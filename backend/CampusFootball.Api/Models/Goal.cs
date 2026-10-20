@@ -8,5 +8,5 @@ public class Goal : MatchEvent
 
     //Goal may not have assister
     public int? AssisterId { get; set; }
-    public Player? Assister { get; set; }        
+    public Player? Assister { get; set; }
 }
