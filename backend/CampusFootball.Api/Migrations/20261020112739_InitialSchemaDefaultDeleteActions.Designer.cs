@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CampusFootball.Api.Migrations
 {
     [DbContext(typeof(CampusFootballContext))]
-    [Migration("20261013193409_TestMigration")]
-    partial class TestMigration
+    [Migration("20261020112739_InitialSchemaDefaultDeleteActions")]
+    partial class InitialSchemaDefaultDeleteActions
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
