@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString =
-    builder.Configuration.GetConnectionString("DefaultConnection")
+    builder.Configuration.GetConnectionString("Database")
         ?? throw new InvalidOperationException("Connection string"
-        + "'DefaultConnection' not found.");
+        + "'Database' not found.");
 
 builder.Services.AddDbContext<CampusFootballContext> ( optionsBuilder =>
     optionsBuilder.UseNpgsql(connectionString)
