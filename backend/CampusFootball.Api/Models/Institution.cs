@@ -7,4 +7,7 @@ public class Institution
 
     public int? ParentId { get; set; }
     public Institution? Parent { get; set; }
+
+    // navigational property
+    public ICollection<Team> Teams { get; } = [];
 }
