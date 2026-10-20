@@ -1,17 +1,19 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
 
 services:
-  campusfootballapi:
-    image: campusfootballapi
+  campusfootball-api:
+    image: campusfootball-api
     build:
       context: .
       dockerfile: backend/CampusFootball.Api/Dockerfile
     environment:
+      #Pass db connection string to backend api container st. configuration centralized here with .env
       ConnectionStrings__Database: "Host=db;Port=5432;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}"
     ports:
       - 8080:8080
     networks:
       - dev-network
+    #Startup race prevention. Wait until db service is confirmed ready, health-check
     depends_on:
       db:
         condition: service_healthy
