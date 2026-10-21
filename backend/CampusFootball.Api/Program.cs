@@ -22,11 +22,7 @@ if (app.Environment.IsDevelopment())
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<CampusFootballContext>();
-        var pendingMigrations = dbContext.Database.GetPendingMigrations(); // find unapplied migrations
-        if (pendingMigrations.Any()) // if any:
-        {
-            dbContext.Database.Migrate(); // apply them
-        }
+        await dbContext.Database.MigrateAsync();
     }
 
     // Map Api documentation endpoints
