@@ -1,5 +1,6 @@
 using CampusFootball.Api.Data;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ if (app.Environment.IsDevelopment())
 
     // Map Api documentation endpoints
     app.MapOpenApi();
+    app.MapScalarApiReference("/api");
 }
 
 // Configure the HTTP request pipeline, middleware
