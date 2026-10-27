@@ -1,0 +1,4 @@
+# File pattern followed by one or more owners.
+
+# Default owners for everything in the repo - unless a later match takes precedence
+* @cssc-aau/maintainers
