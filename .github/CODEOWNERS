@@ -1,4 +1,9 @@
-# File pattern followed by one or more owners.
+# Users & teams referenced in this file will automatically be requested as reviewers for PRs that modify the given paths.
+# Used in branch protection rules to require reviews by the owners of the changed files. 
+# See https://help.github.com/articles/about-code-owners/
 
 # Default owners for everything in the repo - unless a later match takes precedence
-* @cssc-aau/maintainers
+*                   @cssc-aau/maintainers
+
+# Owner for the CODEOWNERS file itself
+/.github/CODEOWNERS @abtrez
