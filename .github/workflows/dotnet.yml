@@ -8,6 +8,9 @@ on: #the events that automatically trigger this workflow to run
   pull_request:
     branches: [ "main" ]
 
+permissions: #Limit (otherwise default) permissions granted to the GITHUB_TOKEN. Only allow the minimum required repo access rights
+  contents: read
+
 jobs: #that make up a workflow run. Jobs are run in parallel by default, sequential dependencies defined with 'needs'
   build-and-test: #job_id
 
