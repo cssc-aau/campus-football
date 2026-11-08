@@ -1,0 +1,40 @@
+# Workflow that builds & tests a .NET project (see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net)
+
+name: CI .NET #workflow name for display under repo's "Actions" tab
+
+on: #the events that automatically trigger this workflow to run
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions: #Limit (otherwise default) permissions granted to the GITHUB_TOKEN. Only allow the minimum required repo access rights
+  contents: read
+
+jobs: #that make up a workflow run. Jobs are run in parallel by default, sequential dependencies defined with 'needs'
+  build-and-test: #job_id
+
+    runs-on: ubuntu-latest #Runner environment (vm) of this job
+
+    defaults: #Default settings that apply to all steps in this job. Also definable for all jobs of a workflow
+      run:
+        working-directory: ./backend #option used for all 'run' commands - for 'dotnet' commands, given repo structure
+    
+    steps: #Sequence of tasks executed, each step '-' runs in its own process in the runner environment, w access to workspace & filesystem
+    
+    - name: Checkout Repository #Clone repo code (@ commit related to triggering event) onto the runner - allowing following steps to access it
+      uses: actions/checkout@v7 #'uses' runs an action defined in: public repo | this repo | published in Docker registries
+
+    - name: Setup .NET #Use a preinstalled version of .NET SDK on a GitHub-hosted runner
+      uses: actions/setup-dotnet@v6
+      with: #map of input params defined by the action ^
+        dotnet-version: 10.0.x
+
+    - name: Install Dependencies #once for use in 'Build' & 'Test' steps
+      run: dotnet restore #'run' runs a command-line program using OS's shell. Each 'run' keyword = new process & shell in runner env
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
