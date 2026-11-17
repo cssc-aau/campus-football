@@ -28,7 +28,7 @@ jobs: #that make up a workflow run. Jobs are run in parallel by default, sequent
     - name: Setup .NET #Use a preinstalled version of .NET SDK on a GitHub-hosted runner
       uses: actions/setup-dotnet@v6
       with: #map of input params defined by the action ^
-        dotnet-version: 10.0.x
+        dotnet-version: 11.0.x
 
     - name: Install Dependencies #once for use in 'Build' & 'Test' steps
       run: dotnet restore #'run' runs a command-line program using OS's shell. Each 'run' keyword = new process & shell in runner env
