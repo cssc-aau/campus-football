@@ -6,7 +6,7 @@ public class VenueSeeder : ISeeder
     public int SeedingOrder { get; init; } = 1;
     public void Seed(CampusFootballContext context)
     {
-        if (context.Set<Venue>().Any()) return; // guard against duplicate inserts (can probably be removed by courtesy of having no volumes)
+        if (context.Set<Venue>().Any()) return; // guard against duplicate inserts
 
         Venue[] venues = [
             new() { Name = "Domen", Address = "Thomas Manns Vej 20"},

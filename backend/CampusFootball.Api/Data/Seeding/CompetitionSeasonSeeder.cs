@@ -12,10 +12,10 @@ public class CompetitionSeasonSeeder : ISeeder
         Season[] seasons = context.Set<Season>().ToArray();
 
         CompetitionSeason[] competitionSeasons = [
-            new() { CompetitionId = competitions[0].Id, SeasonId = seasons[0].Id },
-            new() { CompetitionId = competitions[1].Id, SeasonId = seasons[0].Id },
-            new() { CompetitionId = competitions[0].Id, SeasonId = seasons[1].Id },
-            new() { CompetitionId = competitions[1].Id, SeasonId = seasons[1].Id }
+            new() { Competition = competitions[0], Season = seasons[0] },
+            new() { Competition = competitions[1], Season = seasons[0] },
+            new() { Competition = competitions[0], Season = seasons[1] },
+            new() { Competition = competitions[1], Season = seasons[1] }
         ];
 
         context.Set<CompetitionSeason>().AddRange(competitionSeasons);
