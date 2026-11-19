@@ -5,8 +5,12 @@ name: CI .NET #workflow name for display under repo's "Actions" tab
 on: #the events that automatically trigger this workflow to run
   push:
     branches: [ "main" ]
+    paths-ignore: #Path filter: Skip workflow if ALL changed files match below patterns
+      - 'docs/**'
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - 'docs/**'
 
 permissions: #Limit (otherwise default) permissions granted to the GITHUB_TOKEN. Only allow the minimum required repo access rights
   contents: read
